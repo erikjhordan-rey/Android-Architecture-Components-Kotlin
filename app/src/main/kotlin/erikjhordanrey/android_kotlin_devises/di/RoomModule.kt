@@ -7,7 +7,7 @@ import erikjhordanrey.android_kotlin_devises.data.room.RoomCurrencyDataSource
 import javax.inject.Singleton
 
 @Module
-class DataModule {
+class RoomModule {
 
   @Provides @Singleton fun provideRoomCurrencyDataSource(context: Context) =
       RoomCurrencyDataSource.buildPersistentCurrency(context)

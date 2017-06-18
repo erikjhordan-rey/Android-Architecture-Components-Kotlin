@@ -32,7 +32,8 @@ class CurrencyApplication : Application() {
   fun initializeDagger() {
     appComponent = DaggerAppComponent.builder()
         .appModule(AppModule(this))
-        .dataModule(DataModule()).build()
+        .roomModule(RoomModule())
+        .remoteModule(RemoteModule()).build()
   }
 }
 

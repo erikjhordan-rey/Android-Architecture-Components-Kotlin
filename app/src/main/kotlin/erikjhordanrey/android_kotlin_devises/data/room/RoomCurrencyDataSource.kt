@@ -210,7 +210,7 @@ abstract class RoomCurrencyDataSource : RoomDatabase() {
       return mutableCurrencyList
     }
 
-    fun createCurrencyEntity(countryCode: String, countryName: String) =
+    private fun createCurrencyEntity(countryCode: String, countryName: String) =
         CurrencyEntity(0, countryCode, countryName)
   }
 

@@ -27,7 +27,15 @@ class NavigationActivity : LifecycleActivity() {
 
     val currencyViewModel = ViewModelProviders.of(this).get(CurrencyViewModel::class.java)
     currencyViewModel.getCurrencyList()?.observe(this, Observer { currencyList ->
-      currencyList!!.forEach { println(" Code "+ it.code + " Country " + it.country) }
+      currencyList!!.forEach { //println(" Code " + it.code + " Country " + it.country)
+         }
+    })
+
+    val exchangeViewModel = ViewModelProviders.of(this).get(ExchangeViewModel::class.java)
+    exchangeViewModel.getAvailableExchange("AUD,EUR").observe(this, Observer {
+      availableExchange ->
+      print(availableExchange?.currencyFrom)
+      print(availableExchange?.currencyTo)
     })
   }
 

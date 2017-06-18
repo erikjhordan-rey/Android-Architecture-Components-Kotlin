@@ -17,11 +17,14 @@
 package erikjhordanrey.android_kotlin_devises.data.repository
 
 import android.arch.lifecycle.LiveData
+import erikjhordanrey.android_kotlin_devises.domain.AvailableExchange
 import erikjhordanrey.android_kotlin_devises.domain.Currency
 
 
 interface Repository {
 
   fun getCurrencyList(): LiveData<List<Currency>>
+
+  fun getAvailableExchange(currencies: String): LiveData<AvailableExchange>
 
 }

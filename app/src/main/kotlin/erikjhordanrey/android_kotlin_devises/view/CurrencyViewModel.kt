@@ -15,16 +15,24 @@ class CurrencyViewModel : ViewModel() {
   private var liveCurrencyData: LiveData<List<Currency>>? = null
 
   init {
-    CurrencyApplication.appComponent.inject(this)
+    initializeDagger()
+    loadCurrencyList()
+  }
+
+  fun getCurrencyList(): LiveData<List<Currency>>? {
+    return liveCurrencyData
+  }
+
+
+  private fun loadCurrencyList() {
     if (liveCurrencyData == null) {
       liveCurrencyData = MutableLiveData<List<Currency>>()
       liveCurrencyData = currencyRepository.getCurrencyList()
     }
   }
 
-  fun getCurrencyList(): LiveData<List<Currency>>? {
-    return liveCurrencyData
-  }
+  private fun initializeDagger() = CurrencyApplication.appComponent.inject(this)
+
 }
 
 
