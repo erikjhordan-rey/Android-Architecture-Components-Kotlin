@@ -1,11 +1,15 @@
-package erikjhordanrey.android_kotlin_devises
+package erikjhordanrey.android_kotlin_devises.view
 
+import android.arch.lifecycle.LifecycleActivity
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
-import android.support.v7.app.AppCompatActivity
 import android.widget.TextView
+import erikjhordanrey.android_kotlin_devises.R
 
-class NavigationActivity : AppCompatActivity() {
+
+class NavigationActivity : LifecycleActivity() {
 
   private var message: TextView? = null
 
@@ -15,6 +19,16 @@ class NavigationActivity : AppCompatActivity() {
     message = findViewById(R.id.message) as TextView
     val navigation = findViewById(R.id.navigation) as BottomNavigationView
     navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+  }
+
+
+  override fun onResume() {
+    super.onResume()
+
+    val currencyViewModel = ViewModelProviders.of(this).get(CurrencyViewModel::class.java)
+    currencyViewModel.getCurrencyList()?.observe(this, Observer { currencyList ->
+      currencyList!!.forEach { println(" Code "+ it.code + " Country " + it.country) }
+    })
   }
 
 

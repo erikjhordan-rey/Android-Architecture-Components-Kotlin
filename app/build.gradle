@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
   compileSdkVersion 25
@@ -36,9 +37,26 @@ dependencies {
   })
 
   compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+  compile "android.arch.lifecycle:runtime:1.0.0-alpha3"
+  compile "android.arch.lifecycle:extensions:1.0.0-alpha3"
+  kapt "android.arch.lifecycle:compiler:1.0.0-alpha3"
+  compile "android.arch.persistence.room:runtime:1.0.0-alpha3"
+  kapt "android.arch.persistence.room:compiler:1.0.0-alpha3"
+
+  compile 'com.squareup.retrofit2:retrofit:2.3.0'
+  compile "com.squareup.retrofit2:converter-gson:2.3.0"
+
   compile 'com.android.support:appcompat-v7:25.3.1'
   compile 'com.android.support:design:25.3.1'
   compile 'com.android.support:support-vector-drawable:25.3.1'
   compile 'com.android.support.constraint:constraint-layout:1.0.2'
   testCompile 'junit:junit:4.12'
+
+  String daggerVersion = '2.10'
+  compile "com.google.dagger:dagger:$daggerVersion"
+  kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+
+  compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+  compile 'io.reactivex.rxjava2:rxjava:2.0.8'
 }
