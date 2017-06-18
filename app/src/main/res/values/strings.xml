@@ -1,0 +1,5 @@
+<resources>
+  <string name="app_name">Android-Kotlin-Devises</string>
+  <string name="title_home">Conversion</string>
+  <string name="title_dashboard">About</string>
+</resources>
