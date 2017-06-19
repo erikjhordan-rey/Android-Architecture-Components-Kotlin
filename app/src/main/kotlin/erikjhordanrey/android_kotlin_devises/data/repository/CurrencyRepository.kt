@@ -18,8 +18,7 @@ package erikjhordanrey.android_kotlin_devises.data.repository
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Transformations
-import erikjhordanrey.android_kotlin_devises.data.remote.CurrencyResponse
+import erikjhordanrey.android_kotlin_devises.data.remote.ExchangesResponse
 import erikjhordanrey.android_kotlin_devises.data.remote.RemoteCurrencyDataSource
 import erikjhordanrey.android_kotlin_devises.data.room.CurrencyEntity
 import erikjhordanrey.android_kotlin_devises.data.room.RoomCurrencyDataSource
@@ -29,6 +28,7 @@ import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
+
 
 class CurrencyRepository @Inject constructor(
     val roomCurrencyDataSource: RoomCurrencyDataSource,
@@ -41,47 +41,40 @@ class CurrencyRepository @Inject constructor(
 
   override fun getCurrencyList(): LiveData<List<Currency>> {
     val roomCurrencyDao = roomCurrencyDataSource.currencyDao()
-    return transform(roomCurrencyDao.getAllCurrencies())
+    val mutableLiveData = MutableLiveData<List<Currency>>()
+    roomCurrencyDao.getAllCurrencies()
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .map { currencyList ->
+          mutableLiveData.value = transform(currencyList)
+        }
+
+    return mutableLiveData
+  }
+
+  private fun transform(currencies: List<CurrencyEntity>): List<Currency> {
+    val currencyList = ArrayList<Currency>()
+    currencies.forEach {
+      currencyList.add(Currency(it.countryCode, it.countryName))
+    }
+    return currencyList
   }
 
   override fun getAvailableExchange(currencies: String): LiveData<AvailableExchange> {
-    var mutableAvailableExchange = MutableLiveData<AvailableExchange>()
+    val mutableLiveData = MutableLiveData<AvailableExchange>()
     remoteCurrencyDataSource.requestAvailableExchange(currencies)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
-        .subscribe { currency ->
-          if (currency.isSuccess) {
-            print(" Is Success: " + currency.isSuccess + "\n")
-
-            for(entry in currency.currencyQuotes){
-              println(entry.key + " : "+ entry.value + "\n")
-            }
-
-            mutableAvailableExchange = transform(currency)
-          }else{
-            print("onError")
+        .map { currencyResponse ->
+          if (currencyResponse.success) {
+            mutableLiveData.value = transform(currencyResponse)
           }
         }
-    return mutableAvailableExchange
+    return mutableLiveData
   }
 
-  private fun transform(liveCurrencyEntity: LiveData<List<CurrencyEntity>>): LiveData<List<Currency>> {
-    return Transformations.map(liveCurrencyEntity) { currencyEntities ->
-      val currencyList = ArrayList<Currency>()
-      currencyEntities.forEach {
-        currencyList.add(Currency(it.countryCode, it.countryName))
-      }
-      currencyList
-    }
-  }
-
-  private fun transform(currencyResponse: CurrencyResponse): MutableLiveData<AvailableExchange> {
-    val mutableAvailableExchange = MutableLiveData<AvailableExchange>()
-    mutableAvailableExchange.value = AvailableExchange(
-        0,
-        0
-    )
-    return mutableAvailableExchange
+  private fun transform(exchangeMap: ExchangesResponse): AvailableExchange {
+    return AvailableExchange(exchangeMap.quotes)
   }
 
   private fun populateRoomDataSource(roomCurrencyDataSource: RoomCurrencyDataSource) {

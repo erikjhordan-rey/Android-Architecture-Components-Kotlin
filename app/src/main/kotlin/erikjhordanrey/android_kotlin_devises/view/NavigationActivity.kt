@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.widget.TextView
+import android.widget.Toast
 import erikjhordanrey.android_kotlin_devises.R
 
 
@@ -27,15 +28,17 @@ class NavigationActivity : LifecycleActivity() {
 
     val currencyViewModel = ViewModelProviders.of(this).get(CurrencyViewModel::class.java)
     currencyViewModel.getCurrencyList()?.observe(this, Observer { currencyList ->
-      currencyList!!.forEach { //println(" Code " + it.code + " Country " + it.country)
-         }
+      currencyList!!.forEach {
+        println(" Code " + it.code + " Country " + it.country)
+      }
     })
 
     val exchangeViewModel = ViewModelProviders.of(this).get(ExchangeViewModel::class.java)
-    exchangeViewModel.getAvailableExchange("AUD,EUR").observe(this, Observer {
-      availableExchange ->
-      print(availableExchange?.currencyFrom)
-      print(availableExchange?.currencyTo)
+    exchangeViewModel.getAvailableExchange("AUD,EUR")?.observe(this, Observer { availableExchange ->
+      availableExchange?.availableExchangesMap?.forEach { key, value ->
+        print("OHTE: $key $value")
+        Toast.makeText(this, key, 0).show()
+      }
     })
   }
 
