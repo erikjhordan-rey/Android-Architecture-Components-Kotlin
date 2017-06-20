@@ -11,9 +11,10 @@ android {
     targetSdkVersion 25
     versionCode 1
     versionName "1.0"
-    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     vectorDrawables.useSupportLibrary = true
+
   }
+
   buildTypes {
     release {
       minifyEnabled false
@@ -32,10 +33,6 @@ android {
 
 dependencies {
 
-  androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-    exclude group: 'com.android.support', module: 'support-annotations'
-  })
-
   compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
   compile "android.arch.lifecycle:runtime:1.0.0-alpha3"
@@ -43,6 +40,7 @@ dependencies {
   kapt "android.arch.lifecycle:compiler:1.0.0-alpha3"
   compile "android.arch.persistence.room:runtime:1.0.0-alpha3"
   kapt "android.arch.persistence.room:compiler:1.0.0-alpha3"
+  compile "android.arch.persistence.room:rxjava2:1.0.0-alpha3"
 
   compile 'com.squareup.retrofit2:retrofit:2.3.0'
   compile "com.squareup.retrofit2:converter-gson:2.3.0"
@@ -54,7 +52,6 @@ dependencies {
   compile 'com.android.support:design:25.3.1'
   compile 'com.android.support:support-vector-drawable:25.3.1'
   compile 'com.android.support.constraint:constraint-layout:1.0.2'
-  testCompile 'junit:junit:4.12'
 
   String daggerVersion = '2.10'
   compile "com.google.dagger:dagger:$daggerVersion"

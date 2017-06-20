@@ -18,7 +18,7 @@ package erikjhordanrey.android_kotlin_devises.data.repository
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
-import erikjhordanrey.android_kotlin_devises.data.remote.ExchangesResponse
+import erikjhordanrey.android_kotlin_devises.data.remote.CurrencyResponse
 import erikjhordanrey.android_kotlin_devises.data.remote.RemoteCurrencyDataSource
 import erikjhordanrey.android_kotlin_devises.data.room.CurrencyEntity
 import erikjhordanrey.android_kotlin_devises.data.room.RoomCurrencyDataSource
@@ -45,7 +45,7 @@ class CurrencyRepository @Inject constructor(
     roomCurrencyDao.getAllCurrencies()
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
-        .map { currencyList ->
+        .subscribe { currencyList ->
           mutableLiveData.value = transform(currencyList)
         }
 
@@ -65,16 +65,18 @@ class CurrencyRepository @Inject constructor(
     remoteCurrencyDataSource.requestAvailableExchange(currencies)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
-        .map { currencyResponse ->
-          if (currencyResponse.success) {
+        .subscribe { currencyResponse ->
+          if (currencyResponse.isSuccess) {
             mutableLiveData.value = transform(currencyResponse)
+          }else{
+            throw Throwable("CurrencyRepository -> on Error occurred")
           }
         }
     return mutableLiveData
   }
 
-  private fun transform(exchangeMap: ExchangesResponse): AvailableExchange {
-    return AvailableExchange(exchangeMap.quotes)
+  private fun transform(exchangeMap: CurrencyResponse): AvailableExchange {
+    return AvailableExchange(exchangeMap.currencyQuotes)
   }
 
   private fun populateRoomDataSource(roomCurrencyDataSource: RoomCurrencyDataSource) {

@@ -36,8 +36,7 @@ class NavigationActivity : LifecycleActivity() {
     val exchangeViewModel = ViewModelProviders.of(this).get(ExchangeViewModel::class.java)
     exchangeViewModel.getAvailableExchange("AUD,EUR")?.observe(this, Observer { availableExchange ->
       availableExchange?.availableExchangesMap?.forEach { key, value ->
-        print("OHTE: $key $value")
-        Toast.makeText(this, key, 0).show()
+        Toast.makeText(this, key + " " + value, 0).show()
       }
     })
   }

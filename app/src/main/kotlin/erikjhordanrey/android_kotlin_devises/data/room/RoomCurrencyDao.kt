@@ -19,6 +19,7 @@ package erikjhordanrey.android_kotlin_devises.data.room
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.Query
+import io.reactivex.Flowable
 import io.reactivex.Observable
 
 @Dao
@@ -28,7 +29,7 @@ interface RoomCurrencyDao {
   fun insertAll(currencies: List<CurrencyEntity>)
 
   @Query(RoomContract.SELECT_CURRENCIES)
-  fun getAllCurrencies(): Observable<List<CurrencyEntity>>
+  fun getAllCurrencies(): Flowable<List<CurrencyEntity>>
 
 }
 
