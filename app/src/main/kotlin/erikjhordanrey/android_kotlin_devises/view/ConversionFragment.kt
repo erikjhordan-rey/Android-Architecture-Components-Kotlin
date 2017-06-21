@@ -94,6 +94,8 @@ class ConversionFragment : LifecycleFragment() {
     convertButton?.setOnClickListener { convert() }
   }
 
+  // You can move all this logic to the view model
+
   private fun convert() {
     val exchangeViewModel = ViewModelProviders.of(this).get(ExchangeViewModel::class.java)
     val quantity = currencyEdit?.text.toString()
@@ -152,4 +154,5 @@ class ConversionFragment : LifecycleFragment() {
   private fun getCurrencyCodeResult(currency: String) = currency.substring(3)
 
   private fun Double.format(digits: Int) = java.lang.String.format("%.${digits}f", this)
+
 }
