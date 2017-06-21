@@ -1,2 +1,5 @@
-# Android-Architecture-Components-Kotlin
-Android Sample **Kotlin Devises (currency converter)** used to practice kotlin programming language and Android Architecture Components.
+ # Android-Architecture-Components-Kotlin
+ 
+ ![](/app/src/main/res/drawable/kotlin_currency.png)
+
+Android Sample **Kotlin Devises (currency converter)** used to practice Kotlin and Android Architecture Components.
