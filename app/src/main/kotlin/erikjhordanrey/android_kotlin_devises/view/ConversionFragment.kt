@@ -19,16 +19,14 @@ package erikjhordanrey.android_kotlin_devises.view
 import android.arch.lifecycle.LifecycleFragment
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.os.Build
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
+import android.support.v7.app.AlertDialog
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.EditText
-import android.widget.Spinner
-import android.widget.Toast
+import android.widget.*
 import erikjhordanrey.android_kotlin_devises.R
 
 
@@ -40,8 +38,18 @@ class ConversionFragment : LifecycleFragment() {
 
   private var fromCurrencySpinner: Spinner? = null
   private var toCurrencySpinner: Spinner? = null
-  private var fromCurrencyEdit: EditText? = null
-  private var toCurrencyEdit: EditText? = null
+  private var currencyEdit: EditText? = null
+  private var convertButton: Button? = null
+
+  private var currenciesAdapter: ArrayAdapter<String>? = null
+  private var currencyFrom: String? = null
+  private var currencyTo: String? = null
+
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    populateSpinnerAdapter()
+  }
 
   override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     return inflater?.inflate(R.layout.conversion_fragment, container, false)
@@ -50,68 +58,98 @@ class ConversionFragment : LifecycleFragment() {
   override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     initUI()
-
   }
 
   private fun initUI() {
     fromCurrencySpinner = view?.findViewById(R.id.from_currency_spinner) as Spinner
     toCurrencySpinner = view?.findViewById(R.id.to_currency_spinner) as Spinner
-    fromCurrencyEdit = view?.findViewById(R.id.from_currency_edit) as EditText
-    toCurrencyEdit = view?.findViewById(R.id.to_currency_edit) as EditText
-    populateSpinners()
-    exchange()
+    currencyEdit = view?.findViewById(R.id.currency_edit) as EditText
+    convertButton = view?.findViewById(R.id.convert_button) as Button
+    initSpinners()
+    initConvertButton()
   }
 
-  private fun populateSpinners() {
+  private fun populateSpinnerAdapter() {
     val currencyViewModel = ViewModelProviders.of(this).get(CurrencyViewModel::class.java)
     val currencies = ArrayList<String>()
-    val currenciesAdapter = ArrayAdapter(activity, R.layout.item_spinner, currencies)
+    currenciesAdapter = ArrayAdapter(activity, R.layout.item_spinner, currencies)
     currencyViewModel.getCurrencyList()?.observe(this, Observer { currencyList ->
       currencyList!!.forEach {
         currencies.add(it.code + "  " + it.country)
       }
-      currenciesAdapter.setDropDownViewResource(R.layout.item_spinner);
-      currenciesAdapter.notifyDataSetChanged()
+      currenciesAdapter!!.setDropDownViewResource(R.layout.item_spinner);
+      currenciesAdapter!!.notifyDataSetChanged()
     })
 
+  }
+
+  private fun initSpinners() {
     fromCurrencySpinner?.adapter = currenciesAdapter
     fromCurrencySpinner?.setSelection(0)
     toCurrencySpinner?.adapter = currenciesAdapter
     toCurrencySpinner?.setSelection(0)
-
   }
 
-
-  private fun exchange() {
-
-    fromCurrencyEdit?.addTextChangedListener(object : TextWatcher {
-      override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-        convert()
-      }
-
-      override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-
-      override fun afterTextChanged(s: Editable) {
-      }
-
-    })
+  private fun initConvertButton() {
+    convertButton?.setOnClickListener { convert() }
   }
 
   private fun convert() {
     val exchangeViewModel = ViewModelProviders.of(this).get(ExchangeViewModel::class.java)
-    var currencyFrom = fromCurrencySpinner?.selectedItem.toString()
-    val currencyTo = toCurrencySpinner?.selectedItem.toString()
-    val currencies = getCurrencyCode(currencyFrom) + "," + getCurrencyCode(currencyTo)
+    val quantity = currencyEdit?.text.toString()
+    currencyFrom = getCurrencyCode(fromCurrencySpinner?.selectedItem.toString())
+    currencyTo = getCurrencyCode(toCurrencySpinner?.selectedItem.toString())
+    val currencies = currencyFrom + "," + currencyTo
 
-    if (currencyFrom != currencyTo) {
+    if (quantity.isNotEmpty() && currencyFrom != currencyTo) {
       exchangeViewModel.getAvailableExchange(currencies)?.observe(this, Observer { availableExchange ->
-        availableExchange?.availableExchangesMap?.forEach { key, value ->
-          val hola = key + " " + value
-          Toast.makeText(activity, hola, 0).show()
-        }
+        exchange(quantity.toDouble(), availableExchange!!.availableExchangesMap)
       })
+
+    } else {
+      Toast.makeText(activity, "Could not convert.", Toast.LENGTH_SHORT).show()
     }
   }
 
+  private fun exchange(quantity: Double, availableExchangesMap: Map<String, Double>) {
+    val exchangesKeys = availableExchangesMap.keys.toList()
+    val exchangesValues = availableExchangesMap.values.toList()
+
+    val fromCurrency = exchangesValues[0]
+    val toCurrency = exchangesValues[1]
+
+    val fromCurrencyKey = getCurrencyCodeResult(exchangesKeys[0])
+    val toCurrencyKey = getCurrencyCodeResult(exchangesKeys[1])
+
+    val usdExchange = quantity.div(fromCurrency)
+    val exchangeResult = usdExchange.times(toCurrency)
+
+    val result = quantity.toString() + " " + fromCurrencyKey + " = " + exchangeResult.format(4) + " " + toCurrencyKey
+    showResult(result)
+
+  }
+
+  private fun showResult(result: String) {
+    val builder: AlertDialog.Builder
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+      builder = AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle)
+    } else {
+      builder = AlertDialog.Builder(context)
+    }
+
+    val setMessage = TextView(activity)
+    setMessage.text = result
+    setMessage.gravity = Gravity.CENTER_HORIZONTAL
+    builder.setView(setMessage)
+    builder.setTitle("Currency Converter")
+        .setPositiveButton(android.R.string.yes, null)
+        .setIcon(R.drawable.ic_attach_money_black_24dp)
+        .show()
+  }
+
   private fun getCurrencyCode(currency: String) = currency.substring(0, 3)
+
+  private fun getCurrencyCodeResult(currency: String) = currency.substring(3)
+
+  private fun Double.format(digits: Int) = java.lang.String.format("%.${digits}f", this)
 }

@@ -35,10 +35,10 @@ class ExchangeViewModel : ViewModel() {
   }
 
   fun getAvailableExchange(currencies: String): LiveData<AvailableExchange>? {
-    if (mutableAvailableExchange == null) {
+      mutableAvailableExchange = null
       mutableAvailableExchange = MutableLiveData<AvailableExchange>()
       mutableAvailableExchange = currencyRepository.getAvailableExchange(currencies)
-    }
+
 
     return mutableAvailableExchange
   }

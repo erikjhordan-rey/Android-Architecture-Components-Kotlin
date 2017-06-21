@@ -16,5 +16,7 @@
 
 package erikjhordanrey.android_kotlin_devises.domain
 
-data class AvailableExchange(var availableExchangesMap: Map<String, Double>)
+import java.io.Serializable
+
+data class AvailableExchange(var availableExchangesMap: Map<String, Double>): Serializable
 

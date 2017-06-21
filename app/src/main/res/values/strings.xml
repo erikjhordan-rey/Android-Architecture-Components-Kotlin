@@ -8,4 +8,7 @@
   <string name="currency_converter">Currency Converter</string>
   <string name="currency">Currency Converter</string>
   <string name="powered_by_kotlin">powered by kotlin</string>
+  <string name="convert">Convert</string>
+  <string name="to">To</string>
+  <string name="_0_00">1.00</string>
 </resources>
