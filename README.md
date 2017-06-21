@@ -4,6 +4,11 @@
 
 Android Sample **Kotlin Devises (currency converter)** used to practice Kotlin and Android Architecture Components.
 
+
+
+# Demo
+![](./art/demo.png)
+
 Do you want to contribute?
 --------------------------
 
