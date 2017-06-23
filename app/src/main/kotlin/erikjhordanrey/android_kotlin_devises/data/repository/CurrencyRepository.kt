@@ -18,6 +18,7 @@ package erikjhordanrey.android_kotlin_devises.data.repository
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
+import android.util.Log
 import erikjhordanrey.android_kotlin_devises.data.remote.CurrencyResponse
 import erikjhordanrey.android_kotlin_devises.data.remote.RemoteCurrencyDataSource
 import erikjhordanrey.android_kotlin_devises.data.room.CurrencyEntity
@@ -25,7 +26,10 @@ import erikjhordanrey.android_kotlin_devises.data.room.RoomCurrencyDataSource
 import erikjhordanrey.android_kotlin_devises.domain.AvailableExchange
 import erikjhordanrey.android_kotlin_devises.domain.Currency
 import io.reactivex.Completable
+import io.reactivex.CompletableObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.annotations.NonNull
+import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
@@ -68,7 +72,7 @@ class CurrencyRepository @Inject constructor(
         .subscribe { currencyResponse ->
           if (currencyResponse.isSuccess) {
             mutableLiveData.value = transform(currencyResponse)
-          }else{
+          } else {
             throw Throwable("CurrencyRepository -> on Error occurred")
           }
         }
@@ -82,9 +86,21 @@ class CurrencyRepository @Inject constructor(
   private fun populateRoomDataSource(roomCurrencyDataSource: RoomCurrencyDataSource) {
     val currencyDao = roomCurrencyDataSource.currencyDao()
     val currencyEntityList = RoomCurrencyDataSource.getAllCurrencies()
-    Completable.create { currencyDao.insertAll(currencyEntityList) }
+    Completable.fromAction { currencyDao.insertAll(currencyEntityList) }
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
-        .subscribe { }
+        .subscribe(object : CompletableObserver {
+          override fun onSubscribe(@NonNull d: Disposable) {
+
+          }
+          override fun onComplete() {
+            Log.i(CurrencyRepository::class.java.simpleName, "DataSource has been Populated");
+          }
+          override fun onError(@NonNull e: Throwable) {
+            e.printStackTrace()
+            Log.e(CurrencyRepository::class.java.simpleName, "DataSource hasn't been Populated")
+          }
+        })
+
   }
 }
