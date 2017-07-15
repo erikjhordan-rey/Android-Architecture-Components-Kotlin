@@ -4,6 +4,15 @@
 
 Android Sample **Kotlin Devises (currency converter)** used to practice Kotlin and Android Architecture Components.
 
+### Support of Kotlin & Architecture Components
+
+I wrote a post in my blog called [Support of Kotlin & Architecture Components](https://erikcaffrey.github.io/ANDROID-kotlin-arch-components/) to explain how **Android Architecture Components** works.
+
+
+# Kotlin Devises architecture
+![](./art/currency-arch.png)
+
+
 Tools used on the sample project
 ------------------------------------
 * [Kotlin][6]
@@ -24,9 +33,6 @@ Tools used on the sample project
 [6]: https://kotlinlang.org/
 [7]: https://currencylayer.com/
 
-
-# Kotlin Devises architecture
-![](./art/currency-arch.png)
 
 
 # Demo
