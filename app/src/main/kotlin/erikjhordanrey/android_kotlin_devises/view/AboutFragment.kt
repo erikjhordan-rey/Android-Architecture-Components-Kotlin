@@ -31,6 +31,7 @@ class AboutFragment : Fragment() {
 
   companion object {
 
+    const val PROJECT_BLOG_POST = "https://erikcaffrey.github.io/ANDROID-kotlin-arch-components/"
     const val PROJECT_SOURCE_CODE = "https://github.com/erikcaffrey/Android-Architecture-Components-Kotlin"
 
     fun newInstance() = AboutFragment()
@@ -43,14 +44,16 @@ class AboutFragment : Fragment() {
   }
 
   private fun initUI(view: View?) {
-    val showSourceText = view?.findViewById(R.id.show_me_code) as TextView
-    showSourceText.setOnClickListener { startActivityActionView() }
+    val showPostText = view?.findViewById(R.id.show_me_post) as TextView
+    val showSourceText = view.findViewById(R.id.show_me_code) as TextView
+
+    showPostText.setOnClickListener { startActivityActionView(PROJECT_BLOG_POST) }
+    showSourceText.setOnClickListener { startActivityActionView(PROJECT_SOURCE_CODE) }
   }
 
 
-  private fun startActivityActionView() {
-    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(PROJECT_SOURCE_CODE)))
+  private fun startActivityActionView(url: String) {
+    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
   }
-
 }
 
