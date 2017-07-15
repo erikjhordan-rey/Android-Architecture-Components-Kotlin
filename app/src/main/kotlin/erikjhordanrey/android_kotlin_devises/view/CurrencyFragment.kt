@@ -30,10 +30,10 @@ import android.widget.*
 import erikjhordanrey.android_kotlin_devises.R
 
 
-class ConversionFragment : LifecycleFragment() {
+class CurrencyFragment : LifecycleFragment() {
 
   companion object {
-    fun newInstance() = ConversionFragment()
+    fun newInstance() = CurrencyFragment()
   }
 
   private var fromCurrencySpinner: Spinner? = null
@@ -45,19 +45,25 @@ class ConversionFragment : LifecycleFragment() {
   private var currencyFrom: String? = null
   private var currencyTo: String? = null
 
+  private var currencyViewModel: CurrencyViewModel? = null
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+    initViewModel()
     populateSpinnerAdapter()
   }
 
   override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    return inflater?.inflate(R.layout.conversion_fragment, container, false)
+    return inflater?.inflate(R.layout.currency_fragment, container, false)
   }
 
   override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     initUI()
+  }
+
+  private fun initViewModel() {
+    currencyViewModel = ViewModelProviders.of(this).get(CurrencyViewModel::class.java)
   }
 
   private fun initUI() {
@@ -70,10 +76,9 @@ class ConversionFragment : LifecycleFragment() {
   }
 
   private fun populateSpinnerAdapter() {
-    val currencyViewModel = ViewModelProviders.of(this).get(CurrencyViewModel::class.java)
     val currencies = ArrayList<String>()
     currenciesAdapter = ArrayAdapter(activity, R.layout.item_spinner, currencies)
-    currencyViewModel.getCurrencyList()?.observe(this, Observer { currencyList ->
+    currencyViewModel?.getCurrencyList()?.observe(this, Observer { currencyList ->
       currencyList!!.forEach {
         currencies.add(it.code + "  " + it.country)
       }
@@ -97,14 +102,13 @@ class ConversionFragment : LifecycleFragment() {
   // You can move all this logic to the view model
 
   private fun convert() {
-    val exchangeViewModel = ViewModelProviders.of(this).get(ExchangeViewModel::class.java)
     val quantity = currencyEdit?.text.toString()
     currencyFrom = getCurrencyCode(fromCurrencySpinner?.selectedItem.toString())
     currencyTo = getCurrencyCode(toCurrencySpinner?.selectedItem.toString())
     val currencies = currencyFrom + "," + currencyTo
 
     if (quantity.isNotEmpty() && currencyFrom != currencyTo) {
-      exchangeViewModel.getAvailableExchange(currencies)?.observe(this, Observer { availableExchange ->
+      currencyViewModel?.getAvailableExchange(currencies)?.observe(this, Observer { availableExchange ->
         exchange(quantity.toDouble(), availableExchange!!.availableExchangesMap)
       })
 
@@ -143,7 +147,7 @@ class ConversionFragment : LifecycleFragment() {
     setMessage.text = result
     setMessage.gravity = Gravity.CENTER_HORIZONTAL
     builder.setView(setMessage)
-    builder.setTitle("Currency Converter")
+    builder.setTitle(getString(R.string.currency_converter))
         .setPositiveButton(android.R.string.yes, null)
         .setIcon(R.drawable.ic_attach_money_black_24dp)
         .show()
