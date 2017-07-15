@@ -40,7 +40,7 @@ Tools used on the sample project
 
 
 
-# Resources to start with Kotlin on Android
+### Resources to start with Kotlin on Android
 
 * [Getting started with Android and Kotlin by Jetbrains][9]
 * [Get Started with Kotlin on Android by Google][10]
@@ -58,7 +58,7 @@ Tools used on the sample project
 
 
 
-# Resources to start with Android Architecture Components 
+### Resources to start with Android Architecture Components 
 
 * [Android Architecture Components][20]
 * [Adding Components to your Project][21]
