@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    >
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/colorPrimary"
+      android:orientation="vertical"
+      android:padding="16dp"
+      >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:gravity="top|end"
+        android:text="@string/powered_by_kotlin"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        />
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"
+        android:src="@drawable/kotlin_currency"
+        />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/currency_converter"
+        android:textColor="@android:color/white"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        />
+
+
+    <EditText
+        android:id="@+id/currency_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:hint="@string/_0_00"
+        android:inputType="numberDecimal"
+        android:textColor="@android:color/white"
+        android:textColorHint="@color/white_trans"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        />
+
+
+    <Spinner
+        android:id="@+id/from_currency_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:dropDownSelector="@color/colorPrimary"
+        android:spinnerMode="dropdown"
+        />
+
+
+    <TextView
+        android:id="@+id/to_currency_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="@string/to"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        />
+
+    <Spinner
+        android:id="@+id/to_currency_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:spinnerMode="dropdown"
+        android:theme="@style/AppTheme"
+        />
+
+
+    <Button
+        android:id="@+id/convert_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorAccent"
+        android:text="@string/convert"
+        android:textColor="@android:color/white"
+        />
+
+  </LinearLayout>
+</ScrollView>
