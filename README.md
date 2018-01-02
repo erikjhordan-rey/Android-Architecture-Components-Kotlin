@@ -80,7 +80,7 @@ Feel free to report or add any useful feature, I will be glad to improve it with
 Developed By
 ------------
 
-* Erik Jhordan Rey  - <erikcaffrey10@gmail.com> or <erik.gonzalez@schibsted.com>
+* Erik Jhordan Rey  - <erikjhordan.rey@gmail.com> or <erik.gonzalez@schibsted.com>
 
 License
 -------
