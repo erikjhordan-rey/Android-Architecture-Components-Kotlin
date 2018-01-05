@@ -72,6 +72,14 @@ Tools used on the sample project
 [23]: https://codelabs.developers.google.com/?cat=Android
 [24]: https://www.youtube.com/results?search_query=google+I%2FO+android+components
 
+### Bonus - LiveData-DataBinding-Kotlin
+
+" You can now use a LiveData object as an observable field in data binding expressions. The ViewDataBinding class now includes a new setLifecycle method that you need to use to use to observe LiveData objects "
+
+<img src="https://user-images.githubusercontent.com/5893477/34550143-0f06846c-f0d4-11e7-97ae-91b02f3c11e5.gif" width="220">
+
+[Source Code](https://github.com/erikcaffrey/LiveData-DataBinding-Kotlin)
+
 Do you want to contribute?
 --------------------------
 
