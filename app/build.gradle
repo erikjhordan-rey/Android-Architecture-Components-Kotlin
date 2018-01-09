@@ -5,7 +5,7 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
   compileSdkVersion 27
-  buildToolsVersion "27.0.1"
+  buildToolsVersion "27.0.2"
   defaultConfig {
     applicationId "erikjhordanrey.android_kotlin_devises"
     minSdkVersion 15
@@ -24,7 +24,7 @@ android {
   }
 
   /**
-   * if you mix Java and Kotlin files is a good practice created the kotlin directory
+   * if you will mix Java and Kotlin files in the same project is a good practice create a kotlin directory
    * but I prefer created the kotlin package although I will not mix them
    **/
   sourceSets {
@@ -50,7 +50,7 @@ dependencies {
   compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
   compile 'com.squareup.okhttp3:logging-interceptor:3.8.1'
 
-  String supportVersion = '27.0.0'
+  String supportVersion = '27.0.2'
   compile "com.android.support:appcompat-v7:$supportVersion"
   compile "com.android.support:design:$supportVersion"
   compile "com.android.support:support-vector-drawable:$supportVersion"
