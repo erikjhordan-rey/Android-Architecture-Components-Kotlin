@@ -80,7 +80,7 @@ class CurrencyViewModel : ViewModel(), LifecycleObserver {
   }
 
   @OnLifecycleEvent(ON_DESTROY)
-  private fun unSubscribeViewModel() {
+  fun unSubscribeViewModel() {
     for (disposable in currencyRepository.allCompositeDisposable) {
       compositeDisposable.addAll(disposable)
     }
