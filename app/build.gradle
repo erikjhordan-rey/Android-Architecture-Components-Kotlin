@@ -5,7 +5,7 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
   compileSdkVersion 27
-  buildToolsVersion "27.0.2"
+  buildToolsVersion "27.0.3"
   defaultConfig {
     applicationId "erikjhordanrey.android_kotlin_devises"
     minSdkVersion 15
@@ -23,10 +23,6 @@ android {
     }
   }
 
-  /**
-   * if you will mix Java and Kotlin files in the same project is a good practice create a kotlin directory
-   * but I prefer created the kotlin package although I will not mix them
-   **/
   sourceSets {
     main.java.srcDirs += 'src/main/kotlin'
   }
@@ -34,32 +30,32 @@ android {
 
 dependencies {
 
-  compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
   String archVersion = '1.0.0'
-  compile "android.arch.lifecycle:runtime:$archVersion"
-  compile "android.arch.lifecycle:extensions:$archVersion"
+  implementation "android.arch.lifecycle:runtime:1.1.1"
+  implementation "android.arch.lifecycle:extensions:1.1.1"
   kapt "android.arch.lifecycle:compiler:$archVersion"
-  compile "android.arch.persistence.room:runtime:$archVersion"
+  implementation "android.arch.persistence.room:runtime:$archVersion"
   kapt "android.arch.persistence.room:compiler:$archVersion"
-  compile "android.arch.persistence.room:rxjava2:$archVersion"
+  implementation "android.arch.persistence.room:rxjava2:$archVersion"
 
-  compile 'com.squareup.retrofit2:retrofit:2.3.0'
-  compile "com.squareup.retrofit2:converter-gson:2.3.0"
-  compile 'com.squareup.okhttp3:okhttp:3.9.0'
-  compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
-  compile 'com.squareup.okhttp3:logging-interceptor:3.8.1'
+  implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+  implementation "com.squareup.retrofit2:converter-gson:2.3.0"
+  implementation 'com.squareup.okhttp3:okhttp:3.9.1'
+  implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+  implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
 
-  String supportVersion = '27.0.2'
-  compile "com.android.support:appcompat-v7:$supportVersion"
-  compile "com.android.support:design:$supportVersion"
-  compile "com.android.support:support-vector-drawable:$supportVersion"
-  compile 'com.android.support.constraint:constraint-layout:1.0.2'
+  String supportVersion = '27.1.1'
+  implementation "com.android.support:appcompat-v7:$supportVersion"
+  implementation "com.android.support:design:$supportVersion"
+  implementation "com.android.support:support-vector-drawable:$supportVersion"
+  implementation 'com.android.support.constraint:constraint-layout:1.1.0'
 
   String daggerVersion = '2.13'
-  compile "com.google.dagger:dagger:$daggerVersion"
+  implementation "com.google.dagger:dagger:$daggerVersion"
   kapt "com.google.dagger:dagger-compiler:$daggerVersion"
 
-  compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-  compile 'io.reactivex.rxjava2:rxjava:2.1.5'
+  implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+  implementation 'io.reactivex.rxjava2:rxjava:2.1.10'
 }
