@@ -48,14 +48,12 @@ class CurrencyViewModel : ViewModel(), LifecycleObserver {
     initializeDagger()
   }
 
-
   fun getAvailableExchange(currencies: String): LiveData<AvailableExchange>? {
     liveAvailableExchange = null
     liveAvailableExchange = MutableLiveData<AvailableExchange>()
     liveAvailableExchange = currencyRepository.getAvailableExchange(currencies)
     return liveAvailableExchange
   }
-
 
   fun loadCurrencyList(): LiveData<List<Currency>>? {
     if (liveCurrencyData == null) {
@@ -115,9 +113,6 @@ class CurrencyViewModel : ViewModel(), LifecycleObserver {
     super.onCleared()
   }
 
-
   private fun initializeDagger() = CurrencyApplication.appComponent.inject(this)
 
 }
-
-

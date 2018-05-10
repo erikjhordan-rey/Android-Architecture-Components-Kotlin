@@ -53,7 +53,7 @@ class CurrencyRepository @Inject constructor(
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe({ currencyList ->
           mutableLiveData.value = transform(currencyList)
-        }, { t: Throwable? -> t!!.printStackTrace() })
+        }, { t: Throwable? -> t?.printStackTrace() })
     allCompositeDisposable.add(disposable)
     return mutableLiveData
   }
@@ -77,7 +77,7 @@ class CurrencyRepository @Inject constructor(
           } else {
             throw Throwable("CurrencyRepository -> on Error occurred")
           }
-        }, { t: Throwable? -> t!!.printStackTrace() })
+        }, { t: Throwable? -> t?.printStackTrace() })
     allCompositeDisposable.add(disposable)
     return mutableLiveData
   }

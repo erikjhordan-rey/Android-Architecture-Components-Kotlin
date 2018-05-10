@@ -21,7 +21,6 @@ import erikjhordanrey.android_kotlin_devises.domain.AvailableExchange
 import erikjhordanrey.android_kotlin_devises.domain.Currency
 import io.reactivex.Flowable
 
-
 interface Repository {
 
   fun getTotalCurrencies(): Flowable<Int>

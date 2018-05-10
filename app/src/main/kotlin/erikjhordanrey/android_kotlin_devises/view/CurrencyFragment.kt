@@ -40,11 +40,11 @@ class CurrencyFragment : Fragment() {
   }
 
   private val currencies = ArrayList<String>()
-  private var currenciesAdapter: ArrayAdapter<String>? = null
-  private var currencyFrom: String? = null
-  private var currencyTo: String? = null
+  private lateinit var currenciesAdapter: ArrayAdapter<String>
+  private lateinit var currencyFrom: String
+  private lateinit var currencyTo: String
 
-  private var currencyViewModel: CurrencyViewModel? = null
+  private lateinit var currencyViewModel: CurrencyViewModel
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -64,8 +64,8 @@ class CurrencyFragment : Fragment() {
 
   private fun initViewModel() {
     currencyViewModel = ViewModelProviders.of(this).get(CurrencyViewModel::class.java)
-    currencyViewModel?.let { lifecycle.addObserver(it) }
-    currencyViewModel?.initLocalCurrencies()
+    currencyViewModel.let { lifecycle.addObserver(it) }
+    currencyViewModel.initLocalCurrencies()
   }
 
   private fun initUI() {
@@ -74,12 +74,12 @@ class CurrencyFragment : Fragment() {
   }
 
   private fun populateSpinnerAdapter() {
-    currencyViewModel?.loadCurrencyList()?.observe(this, Observer { currencyList ->
-      currencyList!!.forEach {
+    currencyViewModel.loadCurrencyList()?.observe(this, Observer { currencyList ->
+      currencyList?.forEach {
         currencies.add(it.code + "  " + it.country)
       }
-      currenciesAdapter!!.setDropDownViewResource(R.layout.item_spinner);
-      currenciesAdapter!!.notifyDataSetChanged()
+      currenciesAdapter.setDropDownViewResource(R.layout.item_spinner)
+      currenciesAdapter.notifyDataSetChanged()
     })
 
   }
@@ -102,11 +102,13 @@ class CurrencyFragment : Fragment() {
     val quantity = currency_edit.text.toString()
     currencyFrom = getCurrencyCode(from_currency_spinner.selectedItem.toString())
     currencyTo = getCurrencyCode(to_currency_spinner.selectedItem.toString())
-    val currencies = currencyFrom + "," + currencyTo
+    val currencies = "$currencyFrom,$currencyTo"
 
     if (quantity.isNotEmpty() && currencyFrom != currencyTo) {
-      currencyViewModel?.getAvailableExchange(currencies)?.observe(this, Observer { availableExchange ->
-        exchange(quantity.toDouble(), availableExchange!!.availableExchangesMap)
+      currencyViewModel.getAvailableExchange(currencies)?.observe(this, Observer { availableExchange ->
+        availableExchange?.run {
+          exchange(quantity.toDouble(), availableExchangesMap)
+        }
       })
 
     } else {
@@ -133,11 +135,10 @@ class CurrencyFragment : Fragment() {
   }
 
   private fun showResult(result: String) {
-    val builder: AlertDialog.Builder
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-      builder = AlertDialog.Builder(context!!, R.style.AppCompatAlertDialogStyle)
+    val builder: AlertDialog.Builder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+      AlertDialog.Builder(context!!, R.style.AppCompatAlertDialogStyle)
     } else {
-      builder = AlertDialog.Builder(context!!)
+      AlertDialog.Builder(context!!)
     }
 
     val setMessage = TextView(activity)

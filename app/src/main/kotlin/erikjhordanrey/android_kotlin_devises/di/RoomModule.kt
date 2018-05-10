@@ -28,5 +28,3 @@ class RoomModule {
   @Provides @Singleton fun provideRoomCurrencyDataSource(context: Context) =
       RoomCurrencyDataSource.buildPersistentCurrency(context)
 }
-
-

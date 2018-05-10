@@ -27,5 +27,3 @@ class AppModule(private val currencyApplication: CurrencyApplication) {
   @Provides @Singleton fun provideContext(): Context = currencyApplication
 
 }
-
-

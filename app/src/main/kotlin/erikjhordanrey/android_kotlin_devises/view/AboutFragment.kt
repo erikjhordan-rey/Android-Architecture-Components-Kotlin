@@ -26,7 +26,6 @@ import android.view.ViewGroup
 import erikjhordanrey.android_kotlin_devises.R
 import kotlinx.android.synthetic.main.about_fragment.*
 
-
 class AboutFragment : Fragment() {
 
   companion object {
@@ -50,7 +49,6 @@ class AboutFragment : Fragment() {
     show_me_post.setOnClickListener { startActivityActionView(PROJECT_BLOG_POST) }
     show_me_code.setOnClickListener { startActivityActionView(PROJECT_SOURCE_CODE) }
   }
-
 
   private fun startActivityActionView(url: String) {
     startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
