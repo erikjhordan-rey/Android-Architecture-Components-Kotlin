@@ -81,6 +81,14 @@ Tools used on the sample project
 
 [Source Code](https://github.com/erikcaffrey/LiveData-DataBinding-Kotlin)
 
+#### Android Paging Library
+
+The Paging Library makes it easier for you to load data on demand within your app's RecyclerView
+
+<img src="https://user-images.githubusercontent.com/5893477/39963467-36e02f3e-5631-11e8-8c0a-37739485c7d4.png" width="260">
+
+[Source Code](https://github.com/erikcaffrey/Movies-PagingLibrary-Arch-Components)
+
 Do you want to contribute?
 --------------------------
 
