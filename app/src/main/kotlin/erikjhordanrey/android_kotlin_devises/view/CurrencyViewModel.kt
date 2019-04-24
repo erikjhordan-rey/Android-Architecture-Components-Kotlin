@@ -16,12 +16,12 @@
 
 package erikjhordanrey.android_kotlin_devises.view
 
-import android.arch.lifecycle.Lifecycle.Event.ON_DESTROY
-import android.arch.lifecycle.LifecycleObserver
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.OnLifecycleEvent
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.Lifecycle.Event.ON_DESTROY
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.ViewModel
 import android.util.Log
 import erikjhordanrey.android_kotlin_devises.data.repository.CurrencyRepository
 import erikjhordanrey.android_kotlin_devises.di.CurrencyApplication

@@ -16,13 +16,13 @@
 
 package erikjhordanrey.android_kotlin_devises.data.room
 
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.Room
-import android.arch.persistence.room.RoomDatabase
 import android.content.Context
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
 
 @Database(
-    entities = arrayOf(CurrencyEntity::class),
+    entities = [CurrencyEntity::class],
     version = 1)
 abstract class RoomCurrencyDataSource : RoomDatabase() {
 

@@ -30,30 +30,26 @@ dependencies {
 
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
 
-  String archVersion = '1.0.0'
-  implementation "android.arch.lifecycle:runtime:1.1.1"
-  implementation "android.arch.lifecycle:extensions:1.1.1"
-  kapt "android.arch.lifecycle:compiler:$archVersion"
-  implementation "android.arch.persistence.room:runtime:$archVersion"
-  kapt "android.arch.persistence.room:compiler:$archVersion"
-  implementation "android.arch.persistence.room:rxjava2:$archVersion"
+  implementation "androidx.appcompat:appcompat:${versions.androidxAppcompat}"
+  implementation "com.google.android.material:material:${versions.material}"
 
-  implementation 'com.squareup.retrofit2:retrofit:2.3.0'
-  implementation "com.squareup.retrofit2:converter-gson:2.3.0"
-  implementation 'com.squareup.okhttp3:okhttp:3.9.1'
-  implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
-  implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
+  implementation "androidx.lifecycle:lifecycle-runtime:${versions.lifecycle}"
+  implementation "androidx.lifecycle:lifecycle-extensions:${versions.lifecycle}"
+  kapt "androidx.lifecycle:lifecycle-compiler:${versions.lifecycle}"
 
-  String supportVersion = '27.1.1'
-  implementation "com.android.support:appcompat-v7:$supportVersion"
-  implementation "com.android.support:design:$supportVersion"
-  implementation "com.android.support:support-vector-drawable:$supportVersion"
-  implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+  implementation "androidx.room:room-runtime:${versions.persistence}"
+  implementation "androidx.room:room-rxjava2:${versions.persistence}"
+  kapt "androidx.room:room-compiler:${versions.persistence}"
 
-  String daggerVersion = '2.13'
-  implementation "com.google.dagger:dagger:$daggerVersion"
-  kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+  implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
+  implementation "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
+  implementation "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofit}"
+  implementation "com.squareup.okhttp3:okhttp:${versions.okhttp}"
+  implementation "com.squareup.okhttp3:logging-interceptor:${versions.okhttp}"
 
-  implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
-  implementation 'io.reactivex.rxjava2:rxjava:2.1.10'
+  implementation "io.reactivex.rxjava2:rxandroid:${versions.rxAndroid}"
+  implementation "io.reactivex.rxjava2:rxjava:${versions.rxJava}"
+
+  implementation "com.google.dagger:dagger:${versions.dagger}"
+  kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
 }
