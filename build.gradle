@@ -15,7 +15,7 @@ buildscript {
           'dagger'           : '2.22.1',
           'retrofit'         : '2.5.0',
           'okhttp'           : '3.12.0',
-          'kotlin'           : '1.3.21'
+          'kotlin'           : '1.3.30'
   ]
 
   repositories {
