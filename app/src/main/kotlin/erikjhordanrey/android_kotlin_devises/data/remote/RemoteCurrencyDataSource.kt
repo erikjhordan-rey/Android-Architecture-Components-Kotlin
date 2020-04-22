@@ -20,8 +20,7 @@ import javax.inject.Inject
 
 class RemoteCurrencyDataSource @Inject constructor(private val remoteCurrencyService: RemoteCurrencyService) {
 
-  fun requestAvailableExchange(currencies: String) =
-      remoteCurrencyService.requestAvailableExchange(
-          RemoteContract.ACCESS_KEY_API_LAYER, currencies, RemoteContract.FORMAT_TYPE)
+    fun requestAvailableExchange(currencies: String) =
+            remoteCurrencyService.requestAvailableExchange(RemoteContract.ACCESS_KEY_API_LAYER, currencies, RemoteContract.FORMAT_TYPE)
 }
 

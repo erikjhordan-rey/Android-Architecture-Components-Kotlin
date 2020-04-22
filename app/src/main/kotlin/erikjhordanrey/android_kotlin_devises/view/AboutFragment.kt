@@ -31,8 +31,8 @@ class AboutFragment : Fragment() {
 
   companion object {
 
-    const val PROJECT_BLOG_POST = "https://erikcaffrey.github.io/ANDROID-kotlin-arch-components/"
-    const val PROJECT_SOURCE_CODE = "https://github.com/erikcaffrey/Android-Architecture-Components-Kotlin"
+    const val PROJECT_BLOG_POST = "https://erikjhordan-rey.github.io/blog/2017/05/22/ANDROID-kotlin-arch-components.html"
+    const val PROJECT_SOURCE_CODE = "https://github.com/erikjhordan-rey/Android-Architecture-Components-Kotlin"
 
     fun newInstance() = AboutFragment()
   }

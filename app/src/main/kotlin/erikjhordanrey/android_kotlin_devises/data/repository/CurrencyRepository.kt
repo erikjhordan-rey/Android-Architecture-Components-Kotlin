@@ -31,10 +31,8 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class CurrencyRepository @Inject constructor(
-        private val roomCurrencyDataSource: RoomCurrencyDataSource,
-        private val remoteCurrencyDataSource: RemoteCurrencyDataSource
-) : Repository {
+class CurrencyRepository @Inject constructor(private val roomCurrencyDataSource: RoomCurrencyDataSource,
+                                             private val remoteCurrencyDataSource: RemoteCurrencyDataSource) : Repository {
 
     val allCompositeDisposable: MutableList<Disposable> = arrayListOf()
 

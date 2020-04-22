@@ -22,12 +22,10 @@ import retrofit2.http.Query
 
 interface RemoteCurrencyService {
 
-  @GET(RemoteContract.LIVE)
-  fun requestAvailableExchange(
-      @Query(RemoteContract.ACCESS_KEY) accessKey: String,
-      @Query(RemoteContract.CURRENCIES) currencies: String,
-      @Query(RemoteContract.FORMAT) format: String
-  ): Observable<CurrencyResponse>
+    @GET(RemoteContract.LIVE)
+    fun requestAvailableExchange(@Query(RemoteContract.ACCESS_KEY) accessKey: String,
+                                 @Query(RemoteContract.CURRENCIES) currencies: String,
+                                 @Query(RemoteContract.FORMAT) format: String): Observable<CurrencyResponse>
 
 }
 

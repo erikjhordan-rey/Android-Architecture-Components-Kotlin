@@ -6,7 +6,7 @@ Android Sample **Kotlin Devises (currency converter)** used to practice Kotlin a
 
 ### Support of Kotlin & Architecture Components
 
-I wrote a post in my blog called [Support of Kotlin & Architecture Components](https://erikcaffrey.github.io/ANDROID-kotlin-arch-components/) to explain how **Android Architecture Components** works.
+I wrote a post in my blog called [Support of Kotlin & Architecture Components](https://erikjhordan-rey.github.io/blog/2017/05/22/ANDROID-kotlin-arch-components.html) to explain how **Android Architecture Components** works.
 
 
 # Kotlin Devises architecture
@@ -79,7 +79,7 @@ Tools used on the sample project
 
 <img src="https://user-images.githubusercontent.com/5893477/34550143-0f06846c-f0d4-11e7-97ae-91b02f3c11e5.gif" width="220">
 
-[Source Code](https://github.com/erikcaffrey/LiveData-DataBinding-Kotlin)
+[Source Code](https://github.com/erikjhordan-rey/LiveData-DataBinding-Kotlin)
 
 #### Android Paging Library
 
@@ -87,7 +87,7 @@ The Paging Library makes it easier for you to load data on demand within your ap
 
 <img src="https://user-images.githubusercontent.com/5893477/39963467-36e02f3e-5631-11e8-8c0a-37739485c7d4.png" width="260">
 
-[Source Code](https://github.com/erikcaffrey/Movies-PagingLibrary-Arch-Components)
+[Source Code](https://github.com/erikjhordan-rey/Movies-PagingLibrary-Arch-Components)
 
 Do you want to contribute?
 --------------------------
