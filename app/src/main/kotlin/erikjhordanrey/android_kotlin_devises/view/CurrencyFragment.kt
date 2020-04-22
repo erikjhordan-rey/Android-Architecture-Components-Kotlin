@@ -30,10 +30,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import erikjhordanrey.android_kotlin_devises.R
-import kotlinx.android.synthetic.main.currency_fragment.convert_button
-import kotlinx.android.synthetic.main.currency_fragment.currency_edit
-import kotlinx.android.synthetic.main.currency_fragment.from_currency_spinner
-import kotlinx.android.synthetic.main.currency_fragment.to_currency_spinner
+import erikjhordanrey.android_kotlin_devises.databinding.CurrencyFragmentBinding
 
 class CurrencyFragment : Fragment() {
 
@@ -44,13 +41,16 @@ class CurrencyFragment : Fragment() {
 
     private lateinit var currencyViewModel: CurrencyViewModel
 
+    private lateinit var binding: CurrencyFragmentBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initViewModel()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.currency_fragment, container, false)
+        binding = CurrencyFragmentBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -83,22 +83,22 @@ class CurrencyFragment : Fragment() {
 
     private fun initSpinners() {
         currenciesAdapter = ArrayAdapter(requireContext(), R.layout.item_spinner, currencies)
-        from_currency_spinner.adapter = currenciesAdapter
-        from_currency_spinner.setSelection(0)
-        to_currency_spinner.adapter = currenciesAdapter
-        to_currency_spinner.setSelection(0)
+        binding.fromCurrencySpinner.adapter = currenciesAdapter
+        binding.fromCurrencySpinner.setSelection(0)
+        binding.toCurrencySpinner.adapter = currenciesAdapter
+        binding.toCurrencySpinner.setSelection(0)
     }
 
     private fun initConvertButton() {
-        convert_button.setOnClickListener { convert() }
+        binding.convertButton.setOnClickListener { convert() }
     }
 
     // You can move all this logic to the view model
 
     private fun convert() {
-        val quantity = currency_edit.text.toString()
-        currencyFrom = getCurrencyCode(from_currency_spinner.selectedItem.toString())
-        currencyTo = getCurrencyCode(to_currency_spinner.selectedItem.toString())
+        val quantity = binding.currencyEdit.text.toString()
+        currencyFrom = getCurrencyCode(binding.fromCurrencySpinner.selectedItem.toString())
+        currencyTo = getCurrencyCode(binding.toCurrencySpinner.selectedItem.toString())
         val currencies = "$currencyFrom,$currencyTo"
 
         if (quantity.isNotEmpty() && currencyFrom != currencyTo) {
@@ -133,9 +133,9 @@ class CurrencyFragment : Fragment() {
 
     private fun showResult(result: String) {
         val builder: AlertDialog.Builder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            AlertDialog.Builder(context!!, R.style.AppCompatAlertDialogStyle)
+            AlertDialog.Builder(requireContext(), R.style.AppCompatAlertDialogStyle)
         } else {
-            AlertDialog.Builder(context!!)
+            AlertDialog.Builder(requireContext())
         }
 
         val setMessage = TextView(activity)

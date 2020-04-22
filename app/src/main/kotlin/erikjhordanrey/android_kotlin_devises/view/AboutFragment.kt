@@ -23,36 +23,37 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import erikjhordanrey.android_kotlin_devises.R
-import kotlinx.android.synthetic.main.about_fragment.show_me_code
-import kotlinx.android.synthetic.main.about_fragment.show_me_post
+import erikjhordanrey.android_kotlin_devises.databinding.AboutFragmentBinding
 
 class AboutFragment : Fragment() {
 
-  companion object {
+    private lateinit var binding: AboutFragmentBinding
 
-    const val PROJECT_BLOG_POST = "https://erikjhordan-rey.github.io/blog/2017/05/22/ANDROID-kotlin-arch-components.html"
-    const val PROJECT_SOURCE_CODE = "https://github.com/erikjhordan-rey/Android-Architecture-Components-Kotlin"
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = AboutFragmentBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-    fun newInstance() = AboutFragment()
-  }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initUI()
+    }
 
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    return inflater.inflate(R.layout.about_fragment, container, false)
-  }
+    private fun initUI() {
+        binding.showMePost.setOnClickListener { startActivityActionView(PROJECT_BLOG_POST) }
+        binding.showMeCode.setOnClickListener { startActivityActionView(PROJECT_SOURCE_CODE) }
+    }
 
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    initUI()
-  }
+    private fun startActivityActionView(url: String) {
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+    }
 
-  private fun initUI() {
-    show_me_post.setOnClickListener { startActivityActionView(PROJECT_BLOG_POST) }
-    show_me_code.setOnClickListener { startActivityActionView(PROJECT_SOURCE_CODE) }
-  }
+    companion object {
 
-  private fun startActivityActionView(url: String) {
-    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
-  }
+        const val PROJECT_BLOG_POST = "https://erikjhordan-rey.github.io/blog/2017/05/22/ANDROID-kotlin-arch-components.html"
+        const val PROJECT_SOURCE_CODE = "https://github.com/erikjhordan-rey/Android-Architecture-Components-Kotlin"
+
+        fun newInstance() = AboutFragment()
+    }
 }
 

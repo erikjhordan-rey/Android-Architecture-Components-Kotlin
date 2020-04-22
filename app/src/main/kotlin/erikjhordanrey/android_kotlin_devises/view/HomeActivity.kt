@@ -22,13 +22,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import erikjhordanrey.android_kotlin_devises.R
-import kotlinx.android.synthetic.main.activity_main.navigation
+import erikjhordanrey.android_kotlin_devises.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
+    private lateinit var binding: ActivityHomeBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         if (savedInstanceState == null) {
             replaceFragment(CurrencyFragment.newInstance())
         }
@@ -50,7 +53,7 @@ class HomeActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     }
 
     private fun initNavigation() {
-        navigation.setOnNavigationItemSelectedListener(this)
+        binding.navigation.setOnNavigationItemSelectedListener(this)
     }
 
     private fun replaceFragment(fragment: Fragment) {

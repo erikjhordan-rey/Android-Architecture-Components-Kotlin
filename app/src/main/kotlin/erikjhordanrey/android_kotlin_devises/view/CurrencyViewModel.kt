@@ -50,14 +50,14 @@ class CurrencyViewModel : ViewModel(), LifecycleObserver {
 
   fun getAvailableExchange(currencies: String): LiveData<AvailableExchange>? {
     liveAvailableExchange = null
-    liveAvailableExchange = MutableLiveData<AvailableExchange>()
+    liveAvailableExchange = MutableLiveData()
     liveAvailableExchange = currencyRepository.getAvailableExchange(currencies)
     return liveAvailableExchange
   }
 
   fun loadCurrencyList(): LiveData<List<Currency>>? {
     if (liveCurrencyData == null) {
-      liveCurrencyData = MutableLiveData<List<Currency>>()
+      liveCurrencyData = MutableLiveData()
       liveCurrencyData = currencyRepository.getCurrencyList()
     }
     return liveCurrencyData
@@ -75,14 +75,6 @@ class CurrencyViewModel : ViewModel(), LifecycleObserver {
           }
         }
     compositeDisposable.add(disposable)
-  }
-
-  @OnLifecycleEvent(ON_DESTROY)
-  fun unSubscribeViewModel() {
-    for (disposable in currencyRepository.allCompositeDisposable) {
-      compositeDisposable.addAll(disposable)
-    }
-    compositeDisposable.clear()
   }
 
   private fun isRoomEmpty(currenciesTotal: Int) = currenciesTotal == 0
@@ -106,6 +98,14 @@ class CurrencyViewModel : ViewModel(), LifecycleObserver {
             Log.e(CurrencyRepository::class.java.simpleName, "DataSource hasn't been Populated")
           }
         })
+  }
+
+  @OnLifecycleEvent(ON_DESTROY)
+  fun unSubscribeViewModel() {
+    for (disposable in currencyRepository.allCompositeDisposable) {
+      compositeDisposable.addAll(disposable)
+    }
+    compositeDisposable.clear()
   }
 
   override fun onCleared() {

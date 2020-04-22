@@ -1,55 +1,58 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'kotlin-android-extensions'
 
 android {
-  compileSdkVersion versions.compileSdk
-  defaultConfig {
-    applicationId "erikjhordanrey.android_kotlin_devises"
-    minSdkVersion versions.minSdk
-    targetSdkVersion versions.targetSdk
-    versionCode 1
-    versionName "1.0"
-    vectorDrawables.useSupportLibrary = true
-  }
-
-  buildTypes {
-    release {
-      minifyEnabled false
-      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    compileSdkVersion versions.compileSdk
+    defaultConfig {
+        applicationId "erikjhordanrey.android_kotlin_devises"
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode 1
+        versionName "1.0"
+        vectorDrawables.useSupportLibrary = true
     }
-  }
 
-  sourceSets {
-    main.java.srcDirs += 'src/main/kotlin'
-  }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    viewBinding {
+        enabled = true
+    }
 }
 
 dependencies {
 
-  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
 
-  implementation "androidx.appcompat:appcompat:${versions.androidxAppcompat}"
-  implementation "com.google.android.material:material:${versions.material}"
+    implementation "androidx.appcompat:appcompat:${versions.androidxAppcompat}"
+    implementation "com.google.android.material:material:${versions.material}"
 
-  implementation "androidx.lifecycle:lifecycle-runtime:${versions.lifecycle}"
-  implementation "androidx.lifecycle:lifecycle-extensions:${versions.lifecycle}"
-  kapt "androidx.lifecycle:lifecycle-compiler:${versions.lifecycle}"
+    implementation "androidx.lifecycle:lifecycle-runtime:${versions.lifecycle}"
+    implementation "androidx.lifecycle:lifecycle-extensions:${versions.lifecycle}"
+    kapt "androidx.lifecycle:lifecycle-compiler:${versions.lifecycle}"
 
-  implementation "androidx.room:room-runtime:${versions.persistence}"
-  implementation "androidx.room:room-rxjava2:${versions.persistence}"
-  kapt "androidx.room:room-compiler:${versions.persistence}"
+    implementation "androidx.room:room-runtime:${versions.persistence}"
+    implementation "androidx.room:room-rxjava2:${versions.persistence}"
+    kapt "androidx.room:room-compiler:${versions.persistence}"
 
-  implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
-  implementation "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
-  implementation "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofit}"
-  implementation "com.squareup.okhttp3:okhttp:${versions.okhttp}"
-  implementation "com.squareup.okhttp3:logging-interceptor:${versions.okhttp}"
+    implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
+    implementation "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofit}"
+    implementation "com.squareup.okhttp3:okhttp:${versions.okhttp}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${versions.okhttp}"
 
-  implementation "io.reactivex.rxjava2:rxandroid:${versions.rxAndroid}"
-  implementation "io.reactivex.rxjava2:rxjava:${versions.rxJava}"
+    implementation "io.reactivex.rxjava2:rxandroid:${versions.rxAndroid}"
+    implementation "io.reactivex.rxjava2:rxjava:${versions.rxJava}"
 
-  implementation "com.google.dagger:dagger:${versions.dagger}"
-  kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
+    implementation "com.google.dagger:dagger:${versions.dagger}"
+    kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
 }

@@ -5,80 +5,73 @@
     android:background="@color/colorPrimary"
     android:gravity="center|top"
     android:orientation="vertical"
-    android:padding="16dp"
-    >
+    android:padding="16dp">
 
-  <ImageView
-      android:layout_width="150dp"
-      android:layout_height="150dp"
-      android:layout_gravity="center"
-      android:layout_margin="16dp"
-      android:src="@drawable/kotlin_currency"
-      />
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"
+        android:contentDescription="@null"
+        android:src="@drawable/kotlin_currency" />
 
-  <TextView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:gravity="center"
-      android:text="@string/currency"
-      android:textColor="@android:color/white"
-      android:textSize="28sp"
-      android:textStyle="bold"
-      />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/currency"
+        android:textColor="@android:color/white"
+        android:textSize="28sp"
+        android:textStyle="bold" />
 
 
-  <TextView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="8dp"
-      android:gravity="center"
-      android:text="@string/disclaimer_sample"
-      android:textColor="@android:color/white"
-      android:textSize="18sp"
-      />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="@string/disclaimer_sample"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
 
-  <View
-      android:layout_width="match_parent"
-      android:layout_height="1dp"
-      android:layout_marginBottom="8dp"
-      android:layout_marginTop="16dp"
-      android:background="#20ffffff"
-      />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:background="#20ffffff" />
 
-  <TextView
-      android:id="@+id/show_me_post"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="8dp"
-      android:gravity="center"
-      android:text="@string/show_me_post"
-      android:textColor="@android:color/white"
-      android:textSize="22sp"
-      android:textStyle="bold"
-      />
+    <TextView
+        android:id="@+id/show_me_post"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="@string/show_me_post"
+        android:textColor="@android:color/white"
+        android:textSize="22sp"
+        android:textStyle="bold" />
 
 
-  <TextView
-      android:id="@+id/show_me_code"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="8dp"
-      android:gravity="center"
-      android:text="@string/show_me_code"
-      android:textColor="@android:color/white"
-      android:textSize="22sp"
-      android:textStyle="bold"
-      />
+    <TextView
+        android:id="@+id/show_me_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="@string/show_me_code"
+        android:textColor="@android:color/white"
+        android:textSize="22sp"
+        android:textStyle="bold" />
 
-  <TextView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_gravity="bottom"
-      android:layout_marginTop="16dp"
-      android:gravity="center"
-      android:text="@string/developed_by"
-      android:textColor="@android:color/white"
-      android:textSize="12sp"
-      />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="@string/developed_by"
+        android:textColor="@android:color/white"
+        android:textSize="12sp" />
 
 </LinearLayout>
