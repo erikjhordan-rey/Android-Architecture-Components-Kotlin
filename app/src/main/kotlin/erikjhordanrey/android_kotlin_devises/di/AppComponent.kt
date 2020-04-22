@@ -16,12 +16,27 @@
 
 package erikjhordanrey.android_kotlin_devises.di
 
+import android.app.Application
+import dagger.BindsInstance
 import dagger.Component
-import erikjhordanrey.android_kotlin_devises.view.CurrencyViewModel
+import erikjhordanrey.android_kotlin_devises.data.repository.CurrencyRepository
+import retrofit2.Retrofit
 import javax.inject.Singleton
 
-@Component(modules = [AppModule::class, RoomModule::class, RemoteModule::class])
-@Singleton interface AppComponent {
+@Component(modules = [RemoteModule::class])
+@Singleton
+interface AppComponent {
 
-  fun inject(currencyViewModel: CurrencyViewModel)
+    @Component.Builder
+    interface Builder {
+
+        @BindsInstance
+        fun application(application: Application): Builder
+
+        fun build(): AppComponent
+    }
+
+    fun provideApplication(): Application
+
+    fun provideRetrofit(): Retrofit
 }

@@ -16,15 +16,24 @@
 
 package erikjhordanrey.android_kotlin_devises.di
 
-import android.content.Context
-import dagger.Module
-import dagger.Provides
-import erikjhordanrey.android_kotlin_devises.data.room.RoomCurrencyDataSource
-import javax.inject.Singleton
+import dagger.BindsInstance
+import dagger.Component
+import erikjhordanrey.android_kotlin_devises.view.CurrencyFragment
 
-@Module
-class RoomModule {
+@Component(modules = [CurrencyModule::class], dependencies = [AppComponent::class])
+@FeatureScope
+interface CurrencyComponent {
 
-  @Provides @Singleton fun provideRoomCurrencyDataSource(context: Context) =
-      RoomCurrencyDataSource.buildPersistentCurrency(context)
+    @Component.Builder
+    interface Builder {
+
+        @BindsInstance
+        fun currencyFragment(currencyFragment: CurrencyFragment): Builder
+
+        fun appComponent(appComponent: AppComponent): Builder
+
+        fun build(): CurrencyComponent
+    }
+
+    fun inject(currencyFragment: CurrencyFragment)
 }

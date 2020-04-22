@@ -21,32 +21,27 @@ import androidx.lifecycle.MutableLiveData
 import erikjhordanrey.android_kotlin_devises.data.remote.CurrencyResponse
 import erikjhordanrey.android_kotlin_devises.data.remote.RemoteCurrencyDataSource
 import erikjhordanrey.android_kotlin_devises.data.room.CurrencyEntity
-import erikjhordanrey.android_kotlin_devises.data.room.RoomCurrencyDataSource
+import erikjhordanrey.android_kotlin_devises.data.room.LocalCurrencyDataSource
 import erikjhordanrey.android_kotlin_devises.domain.AvailableExchange
 import erikjhordanrey.android_kotlin_devises.domain.Currency
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class CurrencyRepository @Inject constructor(private val roomCurrencyDataSource: RoomCurrencyDataSource,
-                                             private val remoteCurrencyDataSource: RemoteCurrencyDataSource) : Repository {
+class CurrencyRepository constructor(private val localCurrencyDataSource: LocalCurrencyDataSource,
+                                     private val remoteCurrencyDataSource: RemoteCurrencyDataSource) : Repository {
 
     val allCompositeDisposable: MutableList<Disposable> = arrayListOf()
 
-    override fun getTotalCurrencies() = roomCurrencyDataSource.currencyDao().getCurrenciesTotal()
+    override fun getTotalCurrencies() = localCurrencyDataSource.getCurrenciesTotal()
 
     override fun addCurrencies() {
-        val currencyEntityList = RoomCurrencyDataSource.getAllCurrencies()
-        roomCurrencyDataSource.currencyDao().insertAll(currencyEntityList)
+        localCurrencyDataSource.insertCurrencies()
     }
 
     override fun getCurrencyList(): LiveData<List<Currency>> {
-        val roomCurrencyDao = roomCurrencyDataSource.currencyDao()
         val mutableLiveData = MutableLiveData<List<Currency>>()
-        val disposable = roomCurrencyDao.getAllCurrencies()
+        val disposable = localCurrencyDataSource.getAllCurrencies()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ currencyList ->

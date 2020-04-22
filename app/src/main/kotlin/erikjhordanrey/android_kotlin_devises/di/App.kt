@@ -16,14 +16,21 @@
 
 package erikjhordanrey.android_kotlin_devises.di
 
-import android.content.Context
-import dagger.Module
-import dagger.Provides
-import javax.inject.Singleton
+import android.app.Application
 
-@Module
-class AppModule(private val currencyApplication: CurrencyApplication) {
+class App : Application() {
 
-  @Provides @Singleton fun provideContext(): Context = currencyApplication
+    companion object {
+        lateinit var appComponent: AppComponent
+    }
 
+    override fun onCreate() {
+        super.onCreate()
+        initializeDagger()
+    }
+
+    private fun initializeDagger() {
+        appComponent = DaggerAppComponent.builder().application(this).build()
+    }
 }
+

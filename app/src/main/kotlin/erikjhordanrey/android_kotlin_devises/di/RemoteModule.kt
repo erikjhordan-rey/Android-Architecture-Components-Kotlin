@@ -21,7 +21,6 @@ import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import erikjhordanrey.android_kotlin_devises.data.remote.RemoteContract
-import erikjhordanrey.android_kotlin_devises.data.remote.RemoteCurrencyService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -50,9 +49,4 @@ class RemoteModule {
           .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
           .client(okHttpClient)
           .build()
-
-
-  @Provides @Singleton fun provideRemoteCurrencyService(retrofit: Retrofit): RemoteCurrencyService =
-      retrofit.create(RemoteCurrencyService::class.java)
-
 }

@@ -21,15 +21,15 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [CurrencyEntity::class], version = 1)
-abstract class RoomCurrencyDataSource : RoomDatabase() {
+@Database(entities = [CurrencyEntity::class], version = 1, exportSchema = false)
+abstract class CurrencyDatabase : RoomDatabase() {
 
     abstract fun currencyDao(): RoomCurrencyDao
 
     companion object {
 
-        fun buildPersistentCurrency(context: Context): RoomCurrencyDataSource = Room.databaseBuilder(context.applicationContext,
-                RoomCurrencyDataSource::class.java, RoomContract.DATABASE_CURRENCY).build()
+        fun buildPersistentCurrency(context: Context): CurrencyDatabase = Room.databaseBuilder(context.applicationContext,
+                CurrencyDatabase::class.java, RoomContract.DATABASE_CURRENCY).build()
 
         fun getAllCurrencies(): List<CurrencyEntity> {
             val mutableCurrencyList = mutableListOf<CurrencyEntity>()

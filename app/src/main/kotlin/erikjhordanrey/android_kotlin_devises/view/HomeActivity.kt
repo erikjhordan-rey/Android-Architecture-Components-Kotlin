@@ -32,9 +32,7 @@ class HomeActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        if (savedInstanceState == null) {
-            replaceFragment(CurrencyFragment.newInstance())
-        }
+        initUi(savedInstanceState)
         initNavigation()
     }
 
@@ -50,6 +48,12 @@ class HomeActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             }
         }
         return false
+    }
+
+    private fun initUi(savedInstanceState: Bundle?) {
+        if (savedInstanceState == null) {
+            replaceFragment(CurrencyFragment.newInstance())
+        }
     }
 
     private fun initNavigation() {

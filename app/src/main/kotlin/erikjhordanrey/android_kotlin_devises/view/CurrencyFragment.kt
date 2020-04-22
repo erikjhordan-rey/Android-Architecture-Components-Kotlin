@@ -28,9 +28,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import erikjhordanrey.android_kotlin_devises.R
 import erikjhordanrey.android_kotlin_devises.databinding.CurrencyFragmentBinding
+import erikjhordanrey.android_kotlin_devises.di.App
+import erikjhordanrey.android_kotlin_devises.di.DaggerCurrencyComponent
+import javax.inject.Inject
 
 class CurrencyFragment : Fragment() {
 
@@ -39,14 +41,10 @@ class CurrencyFragment : Fragment() {
     private lateinit var currencyFrom: String
     private lateinit var currencyTo: String
 
-    private lateinit var currencyViewModel: CurrencyViewModel
+    @Inject
+    lateinit var currencyViewModel: CurrencyViewModel
 
     private lateinit var binding: CurrencyFragmentBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        initViewModel()
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = CurrencyFragmentBinding.inflate(inflater, container, false)
@@ -55,12 +53,17 @@ class CurrencyFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initializeDagger()
+        initViewModel()
         initUI()
         populateSpinnerAdapter()
     }
 
+    private fun initializeDagger() {
+        DaggerCurrencyComponent.builder().appComponent(App.appComponent).currencyFragment(this).build().inject(this)
+    }
+
     private fun initViewModel() {
-        currencyViewModel = ViewModelProvider(this).get(CurrencyViewModel::class.java)
         currencyViewModel.let { lifecycle.addObserver(it) }
         currencyViewModel.initLocalCurrencies()
     }

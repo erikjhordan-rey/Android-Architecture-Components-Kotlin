@@ -30,5 +30,4 @@ interface Repository {
   fun getCurrencyList(): LiveData<List<Currency>>
 
   fun getAvailableExchange(currencies: String): LiveData<AvailableExchange>
-
 }
