@@ -4,7 +4,7 @@ buildscript {
           'compileSdk'       : 28,
           'minSdk'           : 15,
           'targetSdk'        : 28,
-          'androidGradle'    : '3.6.3',
+          'androidGradle'    : '4.0.1',
           'androidx'         : '1.1.0',
           'androidxAppcompat': '1.0.2',
           'lifecycle'        : '2.2.0',
@@ -15,7 +15,7 @@ buildscript {
           'dagger'           : '2.25.4',
           'retrofit'         : '2.5.0',
           'okhttp'           : '3.12.0',
-          'kotlin'           : '1.3.71'
+          'kotlin'           : '1.3.72'
   ]
 
   repositories {
