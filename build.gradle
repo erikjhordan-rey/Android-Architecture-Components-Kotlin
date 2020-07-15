@@ -1,9 +1,9 @@
 buildscript {
 
   ext.versions = [
-          'compileSdk'       : 28,
+          'compileSdk'       : 29,
           'minSdk'           : 15,
-          'targetSdk'        : 28,
+          'targetSdk'        : 29,
           'androidGradle'    : '4.0.1',
           'androidx'         : '1.1.0',
           'androidxAppcompat': '1.0.2',

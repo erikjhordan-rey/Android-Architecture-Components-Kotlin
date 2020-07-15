@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="erikjhordanrey.android_kotlin_devises">
+    package="io.github.erikjhordanrey.kotlin_devises">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <application
-        android:name=".di.App"
+        android:name="io.github.erikjhordanrey.kotlin_devises.di.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".view.HomeActivity"
+            android:name="io.github.erikjhordanrey.kotlin_devises.view.HomeActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
